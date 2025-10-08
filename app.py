@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import joblib
 import requests
+import os
 
 app = Flask(__name__)
 
@@ -8,7 +9,10 @@ app = Flask(__name__)
 model = joblib.load('airquality.joblib')
 
 # OpenWeather API Key
-API_KEY = 'Enter Your API Key'
+API_KEY = os.environ.get('API_KEY')
+
+if not API_KEY:
+    raise ValueError("Missing API_KEY environment variable. Set it in Render or your local .env file.")
 
 @app.route('/')
 def home():
