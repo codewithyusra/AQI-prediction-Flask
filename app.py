@@ -106,4 +106,7 @@ def determine_air_quality(prediction):
         return 'Air Quality Index is Severe', 'Health warnings of emergency conditions. The entire population is more likely to be affected.'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
+
